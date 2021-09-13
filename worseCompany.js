@@ -8,11 +8,11 @@ app.use(express.static('public'));
 app.use('/images', express.static(__dirname + '/Images'));
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+res.sendFile(path.join(__dirname+'/index.html'));
 })
 
 app.get('/save', (req, res) => {
-res.sendFile(path.join(__dirname+'/index.html'));
+res.sendFile(path.join(__dirname+'/poof.html'));
 })
 
 app.listen(port, () => {
