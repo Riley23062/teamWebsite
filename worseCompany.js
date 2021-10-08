@@ -4,6 +4,8 @@ const app = express()
 const port = 3000
 const path = require("path");
 const fs = require('fs');
+var rawdata = fs.readFileSync('teamprofiles.json');
+var readprofile = JSON.parse(rawdata);
 //Folders
 app.use(express.static(path.join(__dirname, '/views')));
 app.use('/images', express.static(__dirname + '/Images'));
