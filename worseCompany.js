@@ -1,21 +1,25 @@
+//Variables
 const express = require('express')
 const app = express()
 const port = 3000
 const path = require("path");
-
+const fs = require('fs');
+//Folders
 app.use(express.static(path.join(__dirname, '/views')));
 app.use('/images', express.static(__dirname + '/Images'));
 app.use('/css', express.static(__dirname + '/css'));
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
-
+//Root directory for the website/ Home page
 app.get('/', (req, res) => {
 res.render('index.ejs');
 })
+//About page
 app.get('/about', (req, res) => {
 res.render('about');
 })
+//Riley's page
 app.get('/Riley', (req, res) => {
 res.render('biography', {
   greeting: 'Riley Rorrer',
@@ -26,6 +30,7 @@ res.render('biography', {
   <p>My favorite games are Street Fighter 2 Turbo, Terraria, Forager, Super Smash Bros Ult., Guilty Gear: Strive, Donkey Kong Country, and Mega Man X</p>`
 });
 })
+//Jenna's page
 app.get('/Jenna', (req, res) => {
 res.render('biography', {
   greeting: 'Jenna Mellen',
@@ -38,6 +43,7 @@ res.render('biography', {
   });
 });
 
+//Dylan's page
 app.get('/Dylan', (req, res) => {
   res.render('biography', {
     greeting: 'GREETINGS HUMANS!!!',
@@ -45,11 +51,28 @@ app.get('/Dylan', (req, res) => {
     bio: `<p>I am Dylan (or NeosChampionX, depending on where you may know me from), your average, everyday, friendly person.</p><p>I like playing League of Legends, a Yu-Gi-Oh player, proficient in Javascript, and a fan of the Touhou Project.</p><p> I do like keeping to myself sometimes, but I am good at talking to people. </p>`
     });
 })
-
+//Feedback page that writes to Feedback.json
+app.get('/feedback', (req, res) => {
+  let rawdata = fs.readFileSync('feedback.json');
+  let feedback = JSON.parse(rawdata);
+  if (req.query.name && req.query.adjective){
+    let saveData = {
+      name : req.query.name,
+      adjective : req.query.adjective
+    }
+    feedback.comments.push(saveData);
+    fs.writeFile('feedback.json', JSON.stringify(feedback) , 'utf8', function(){
+      console.log("Wrote to file");
+      res.send("Thank you for your personal information")})
+  } else {
+  res.send('You kinda suck, send better params, and fill in all the info');
+  }
+})
+//The port it's listening on
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
 })
-
+//404 Page
 app.use((req, res) => {
   res.render('404.ejs');
 
