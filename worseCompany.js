@@ -10,7 +10,8 @@ var readprofile = JSON.parse(rawdata);
 app.use(express.static(path.join(__dirname, '/views')));
 app.use('/images', express.static(__dirname + '/Images'));
 app.use('/css', express.static(__dirname + '/css'));
-
+//express uses url encoded to use post method
+app.use(express.urlencoded());
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 //Root directory for the website/ Home page
@@ -36,20 +37,24 @@ app.get('/Dylan', (req, res) => {
 
 //Feedback page that writes to Feedback.json
 app.get('/feedback', (req, res) => {
+  res.sendFile(path.join(__dirname+'/public/something.html'))
+})
+
+app.post('/feedback', function(req, res) {
   let rawdata = fs.readFileSync('feedback.json');
   let feedback = JSON.parse(rawdata);
-  if (req.query.name && req.query.adjective){
+  if (req.body.name && req.body.comment){
     let saveData = {
-      name : req.query.name,
-      adjective : req.query.adjective
+      name : req.body.name,
+      adjective : req.body.comment
     }
     feedback.comments.push(saveData);
     fs.writeFile('feedback.json', JSON.stringify(feedback) , 'utf8', function(){
       console.log("Wrote to file");
       res.send("Thank you for your personal information")})
-  } else {
-  res.send('You kinda suck, send better params, and fill in all the info');
-  }
+    } else {
+      res.send('You kinda suck, send better params, and fill in all the info');
+    }
 })
 //The port it's listening on
 app.listen(port, () => {
