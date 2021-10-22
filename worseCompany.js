@@ -34,6 +34,7 @@ app.get('/Jenna', (req, res) => {
 app.get('/Dylan', (req, res) => {
   res.render('biography', readprofile.dylan);
 })
+<<<<<<< HEAD
 let rawdata2 = fs.readFileSync('feedback.json');
 let feedback = JSON.parse(rawdata2);
 //Feedback page that writes to Feedback.json
@@ -52,6 +53,23 @@ app.post('/feedback', function(req, res) {
       comment : req.body.comment
     }
     feedback.comment.push(saveData);
+=======
+
+//Feedback page that writes to Feedback.json
+app.get('/feedback', (req, res) => {
+  res.sendFile(path.join(__dirname+'/public/something.html'))
+})
+
+app.post('/feedback', function(req, res) {
+  let rawdata = fs.readFileSync('feedback.json');
+  let feedback = JSON.parse(rawdata);
+  if (req.body.name && req.body.comment){
+    let saveData = {
+      name : req.body.name,
+      adjective : req.body.comment
+    }
+    feedback.comments.push(saveData);
+>>>>>>> pr/7
     fs.writeFile('feedback.json', JSON.stringify(feedback) , 'utf8', function(){
       console.log("Wrote to file");
       res.send("Thank you for your personal information")})
