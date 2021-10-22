@@ -1,5 +1,5 @@
 body {
-  background-color: #e4f2ed
+  background-color: #a8c66c
 }
 img {
   display: block;
@@ -16,13 +16,50 @@ h1 {
 }
 p {
   text-align: center;
+  padding: 0 10px;
   color: black;
   font-family: verdana;
   font-size: 150%;
+  display: inline-block;
+  list-style-type: none;
 }
 li {
   text-align: center;
   color: black;
   font-family: verdana;
   font-size: 150%;
+}
+.center{
+    text-align: center;
+}
+hr.new2 {
+  border-top: 5px solid white;
+}
+
+a:link,
+a:visited {
+  background-color: #1b6535;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-style: solid;
+  border-color: pink;
+}
+
+a:hover,
+a:active {
+  background-color: #e1dd72;
+  color: white;
+    border-style: solid;
+      border-color: #1b6535;
+}
+.copyright{
+  position: absolute; bottom: 0; right: 0;
+  font-size: 50%;
+}
+
+hr.new1 {
+  border-top: 5px solid #FF5349;
 }

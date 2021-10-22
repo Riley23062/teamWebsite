@@ -6,8 +6,14 @@ const path = require("path");
 const fs = require('fs');
 
 
+<<<<<<< HEAD
 var rawdata = fs.readFileSync('teamprofiles.json')
 var readprofile = JSON.parse(rawdata)
+=======
+var rawdata = fs.readFileSync('teamprofiles.json');
+var readprofile = JSON.parse(rawdata);
+//Folders
+>>>>>>> RC
 
 app.use(express.static(path.join(__dirname, '/views')));
 app.use('/images', express.static(__dirname + '/Images'));
@@ -25,6 +31,7 @@ app.get('/about', (req, res) => {
 res.render('about.ejs');
 })
 //Riley's page
+<<<<<<< HEAD
   app.get('/Riley', (req, res) => {
     res.render('biography', readprofile.riley);
 })
@@ -34,6 +41,14 @@ res.render('about.ejs');
 
   app.get('/Dylan', (req, res) => {
     res.render('biography', readprofile.dylan);
+=======
+app.get('/Riley', (req, res) => {
+res.render('biography', readprofile.riley);
+})
+app.get('/Jenna', (req, res) => {
+res.render('biography', readprofile.jenna);
+})
+>>>>>>> RC
 
 })
 
@@ -41,8 +56,15 @@ let rawdata2 = fs.readFileSync('feedback.json');
 let feedback = JSON.parse(rawdata2);
 //Feedback page that writes to Feedback.json
 app.get('/feedback', (req, res) => {
+<<<<<<< HEAD
   res.render('feedback.ejs', {
     comment: feedback.comment,
+=======
+  let rawdata = fs.readFileSync('feedback.json');
+  let feedback = JSON.parse(rawdata);
+  res.render('feedback.ejs', {
+    comments: feedback.comments,
+>>>>>>> RC
   })
 })
 
@@ -62,16 +84,17 @@ app.post('/feedback', function(req, res) {
   if (req.body.name && req.body.comment){
     let saveData = {
       name : req.body.name,
-      adjective : req.body.comment
+      comment : req.body.comment
     }
     feedback.comments.push(saveData);
     fs.writeFile('feedback.json', JSON.stringify(feedback) , 'utf8', function(){
       console.log("Wrote to file");
-      res.send("Thank you for your personal information")})
+      res.redirect("/feedback")})
     } else {
       res.send('You kinda suck, send better params, and fill in all the info');
     }
 })
+
 //The port it's listening on
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
