@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  </head>
+  <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+    </style>
+  <body>
+
+      <h1>type stuff here ig</h1>
+      <form class="" action="/feedback" method="post">
+        <input type="text" name="name" placeholder="name here" value="">
+        <textarea name="comment" placeholder="comment here" value="">
+        </textarea>
+        <input type="submit" name="" value="submit">
+
+
+<% for (var i = 0; i < comment.length; i++) { %>
+  <%= comment[i].name %>
+  <%= comment[i].comment %>
+  <% } %>
+
+
+  </body>
+</html>
