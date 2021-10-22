@@ -39,20 +39,13 @@ app.get('/Dylan', (req, res) => {
   res.render('biography', readprofile.dylan);
 })
 
-let rawdata2 = fs.readFileSync('feedback.json');
-let feedback = JSON.parse(rawdata2);
 //Feedback page that writes to Feedback.json
 app.get('/feedback', (req, res) => {
-
+  let rawdata = fs.readFileSync('feedback.json');
+  let feedback = JSON.parse(rawdata);
   res.render('feedback.ejs', {
-    comment: feedback.comment,
+    comments: feedback.comments,
   })
-})
-
-
-//Feedback page that writes to Feedback.json
-app.get('/feedback', (req, res) => {
-  res.sendFile(path.join(__dirname+'/public/something.html'))
 })
 
 app.post('/feedback', function(req, res) {
@@ -61,12 +54,12 @@ app.post('/feedback', function(req, res) {
   if (req.body.name && req.body.comment){
     let saveData = {
       name : req.body.name,
-      adjective : req.body.comment
+      comment : req.body.comment
     }
     feedback.comments.push(saveData);
     fs.writeFile('feedback.json', JSON.stringify(feedback) , 'utf8', function(){
       console.log("Wrote to file");
-      res.send("Thank you for your personal information")})
+      res.redirect("/feedback")})
     } else {
       res.send('You kinda suck, send better params, and fill in all the info');
     }
