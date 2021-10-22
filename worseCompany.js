@@ -4,7 +4,7 @@ const app = express()
 const port = 3000
 const path = require("path");
 const fs = require('fs');
-<<<<<<< HEAD
+
 
 var rawdata = fs.readFileSync('teamprofiles.json');
 var readprofile = JSON.parse(rawdata);
@@ -14,7 +14,7 @@ var readprofile = JSON.parse(rawdata);
 var rawdata = fs.readFileSync('teamprofiles.json');
 var readprofile = JSON.parse(rawdata);
 //Folders
->>>>>>> main
+
 app.use(express.static(path.join(__dirname, '/views')));
 app.use('/images', express.static(__dirname + '/Images'));
 app.use('/css', express.static(__dirname + '/css'));
@@ -32,26 +32,25 @@ res.render('about');
 })
 //Riley's page
 app.get('/Riley', (req, res) => {
-<<<<<<< HEAD
+
 res.render('biography', readprofile.riley);
 })
 app.get('/Jenna', (req, res) => {
 res.render('biography', readprofile.jenna);
-=======
+
   res.render('biography', readprofile.riley);
 })
 app.get('/Jenna', (req, res) => {
   res.render('biography', readprofile.jenna);
->>>>>>> main
+
 
 });
 
 app.get('/Dylan', (req, res) => {
   res.render('biography', readprofile.dylan);
-<<<<<<< HEAD
-=======
+
 })
-<<<<<<< HEAD
+
 let rawdata2 = fs.readFileSync('feedback.json');
 let feedback = JSON.parse(rawdata2);
 //Feedback page that writes to Feedback.json
@@ -60,7 +59,6 @@ app.get('/feedback', (req, res) => {
   res.render('feedback.ejs', {
     comment: feedback.comment,
   })
->>>>>>> main
 })
 
 app.post('/feedback', function(req, res) {
@@ -71,7 +69,7 @@ app.post('/feedback', function(req, res) {
       comment : req.body.comment
     }
     feedback.comment.push(saveData);
-=======
+
 
 //Feedback page that writes to Feedback.json
 app.get('/feedback', (req, res) => {
@@ -87,7 +85,6 @@ app.post('/feedback', function(req, res) {
       adjective : req.body.comment
     }
     feedback.comments.push(saveData);
->>>>>>> pr/7
     fs.writeFile('feedback.json', JSON.stringify(feedback) , 'utf8', function(){
       console.log("Wrote to file");
       res.send("Thank you for your personal information")})
