@@ -5,12 +5,9 @@ const port = 3000
 const path = require("path");
 const fs = require('fs');
 
-
 var rawdata = fs.readFileSync('teamprofiles.json');
 var readprofile = JSON.parse(rawdata);
 
-
-=======
 var rawdata = fs.readFileSync('teamprofiles.json');
 var readprofile = JSON.parse(rawdata);
 //Folders
@@ -32,23 +29,14 @@ res.render('about');
 })
 //Riley's page
 app.get('/Riley', (req, res) => {
-
 res.render('biography', readprofile.riley);
 })
 app.get('/Jenna', (req, res) => {
 res.render('biography', readprofile.jenna);
-
-  res.render('biography', readprofile.riley);
 })
-app.get('/Jenna', (req, res) => {
-  res.render('biography', readprofile.jenna);
-
-
-});
 
 app.get('/Dylan', (req, res) => {
   res.render('biography', readprofile.dylan);
-
 })
 
 let rawdata2 = fs.readFileSync('feedback.json');
@@ -60,15 +48,6 @@ app.get('/feedback', (req, res) => {
     comment: feedback.comment,
   })
 })
-
-app.post('/feedback', function(req, res) {
-
-  if (req.body.name && req.body.comment){
-    let saveData = {
-      name : req.body.name,
-      comment : req.body.comment
-    }
-    feedback.comment.push(saveData);
 
 
 //Feedback page that writes to Feedback.json
@@ -92,6 +71,7 @@ app.post('/feedback', function(req, res) {
       res.send('You kinda suck, send better params, and fill in all the info');
     }
 })
+
 //The port it's listening on
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
