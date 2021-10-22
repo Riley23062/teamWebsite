@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+  </head>
+  <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+.Stiff{
+  margin: 50px auto 0 auto;
+ width: 400px;
+ height: 120px;
+}
+.Biff {
+  margin: 50px 0;
+}
+    </style>
+  <body>
+    <div class="Stiff">
+      <h1>type stuff here ig</h1>
+      <form class="" action="/feedback" method="post">
+        <input type="text" name="name" placeholder="name here" value="">
+
+        <textarea name="comment" placeholder="comment here" value="">
+        </textarea>
+        <input type="submit" name="" value="submit">
+<div class="Biff">
+  <% for (var i = 0; i < comment.length; i++) { %>
+    <%= comment[i].name %>
+    <%= comment[i].comment %>
+    <% } %>
+</div>
+    </div>
+
+  </body>
+</html>
